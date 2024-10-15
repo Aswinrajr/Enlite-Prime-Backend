@@ -1,6 +1,6 @@
 const User = require("../../Model/userModel");
 
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -23,13 +23,13 @@ const userRegistration = async (req, res) => {
         .json({ message: "User is already registered, please login" });
     } else {
       if (password === confirmPassword) {
-        const hashPassword = await bcrypt.hash(password, 10);
-        console.log("Password hashed", hashPassword);
+        // const hashPassword = await bcrypt.hash(password, 10);
+        // console.log("Password hashed", hashPassword);
         const newUser = new User({
           userName: userName||"User",
           userEmail: email,
           userMobile: phone,
-          userPassword: hashPassword,
+          userPassword: password,
         });
         await newUser.save();
 
@@ -58,7 +58,8 @@ const userLogin = async (req, res) => {
     if (user) {
       console.log(user.status);
       if (user.status == "Active") {
-        const matchPassword = await bcrypt.compare(password, user.userPassword);
+        // const matchPassword = await bcrypt.compare(password, user.userPassword);
+        const matchPassword = user.password===password
         if (matchPassword) {
           const secretKey = process.env.JWT_ADMIN_SECRET_KEY;
           //   const secretKey = "ASWINRAJ@ACHU#UHCAJARNIWSA";

@@ -1,7 +1,7 @@
 const Admin = require("../../Model/adminModel");
 const User = require("../../Model/userModel");
 
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -18,13 +18,13 @@ const adminLogin = async (req, res) => {
   const admin = await Admin.findOne();
   console.log("Admin", admin);
   if (!admin) {
-    const passwordHash = await bcrypt.hash(adminPassword, 10);
-    console.log("Password hashed", passwordHash);
+    // const passwordHash = await bcrypt.hash(adminPassword, 10);
+    // console.log("Password hashed", passwordHash);
     const admin = new Admin({
       adminEmail,
       adminMobile,
 
-      adminPassword: passwordHash,
+      adminPassword: adminPassword,
     });
     await admin.save();
     console.log("Admin registered ");
@@ -46,7 +46,8 @@ const adminVerifyLogin = async (req, res) => {
     console.log(admin);
 
     if (admin) {
-      const matchPassword = await bcrypt.compare(password, admin.adminPassword);
+    //   const matchPassword = await bcrypt.compare(password, admin.adminPassword);
+    const matchPassword = admin.password===password
 
       if (matchPassword) {
         const token = jwt.sign(
