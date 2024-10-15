@@ -59,7 +59,7 @@ const userLogin = async (req, res) => {
       console.log(user.status);
       if (user.status == "Active") {
         // const matchPassword = await bcrypt.compare(password, user.userPassword);
-        const matchPassword = user.password==password
+        const matchPassword = user.userPassword==password
         if (matchPassword) {
           const secretKey = process.env.JWT_ADMIN_SECRET_KEY;
           //   const secretKey = "ASWINRAJ@ACHU#UHCAJARNIWSA";

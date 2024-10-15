@@ -47,7 +47,7 @@ const adminVerifyLogin = async (req, res) => {
 
     if (admin) {
     //   const matchPassword = await bcrypt.compare(password, admin.adminPassword);
-    const matchPassword = admin.password==password
+    const matchPassword = admin.adminPassword==password
 
       if (matchPassword) {
         const token = jwt.sign(
