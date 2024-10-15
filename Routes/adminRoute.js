@@ -15,3 +15,5 @@ adminRoute.post("/userupdate/:id",adminController.updateUserData);
 
 
 module.exports = adminRoute;
+
+

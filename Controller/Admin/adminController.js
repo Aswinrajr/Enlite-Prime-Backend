@@ -137,7 +137,7 @@ const updateUserData = async (req, res) => {
   try {
     console.log("Welcome to update the user", req.body);
     const {id} = req.params
-    const { userEmail, userName, status, } = req.body.userData;
+    const { userEmail, userName } = req.body.userData;
    
 
     const updatedUser = await User.updateOne(
@@ -146,7 +146,7 @@ const updateUserData = async (req, res) => {
         $set: {
           userName: userName,
           userEmail: userEmail,
-          status: status,
+        
         },
       },
       { new: true }
